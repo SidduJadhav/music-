@@ -19,42 +19,50 @@ import {
 // Define trending songs data with audio preview URLs
 const trendingSongs = [
   {
-    name: "Tum Hi Ho",
-    movie: "Aashiqui 2",
+    name: "Maay Bhavani",
+    movie: "Tanhaji",
     language: "Hindi",
-    image: "/placeholder.svg?height=100&width=100",
-    year: "2013",
+    image: "/tanhaji.jpg?height=100&width=100",
+    year: "2020",
     previewUrl: "https://p.scdn.co/mp3-preview/sample.mp3"
   },
   {
-    name: "Belageddu",
-    movie: "Kirik Party",
+    name: "Ninne Rajakumaara",
+    movie: "Rajakumara",
     language: "Kannada",
-    image: "/placeholder.svg?height=100&width=100",
-    year: "2016",
+    image: "/rajakumara.jpg?height=100&width=100",
+    year: "2017",
     previewUrl: "https://p.scdn.co/mp3-preview/sample.mp3"
   },
   {
     name: "Butta Bomma",
     movie: "Ala Vaikunthapurramuloo",
     language: "Telugu",
-    image: "/placeholder.svg?height=100&width=100",
+    image: "/buttabomma.jpg?height=100&width=100",
     year: "2020",
     previewUrl: "https://p.scdn.co/mp3-preview/sample.mp3"
   },
   {
-    name: "Vinnaithaandi Varuvaayaa",
-    movie: "Vinnaithaandi Varuvaayaa",
+    name: "Vaathi Coming",
+    movie: "Master",
     language: "Tamil",
-    image: "/placeholder.svg?height=100&width=100",
-    year: "2010",
+    image: "/master.jpg?height=100&width=100",
+    year: "2021",
     previewUrl: "https://p.scdn.co/mp3-preview/sample.mp3"
   },
   {
-    name: "Entammede Jimikki Kammal",
-    movie: "Velipadinte Pusthakam",
+    name: "Illuminati",
+    movie: "Avesham",
     language: "Malayalam",
-    image: "/placeholder.svg?height=100&width=100",
+    image: "/avesham.jpg?height=100&width=100",
+    year: "2023",
+    previewUrl: "https://p.scdn.co/mp3-preview/sample.mp3"
+  },
+  {
+    name: "Shape of You",
+    movie: "÷ (Divide)",
+    language: "English",
+    image: "/shape of you.jpg?height=100&width=100",
     year: "2017",
     previewUrl: "https://p.scdn.co/mp3-preview/sample.mp3"
   }

@@ -1,8 +1,10 @@
 'use client';
 
 import Link from 'next/link';
-import { MusicalNoteIcon, MicrophoneIcon } from '@heroicons/react/24/solid';
+import Image from 'next/image';
+import { MusicalNoteIcon, MicrophoneIcon, BookOpenIcon } from '@heroicons/react/24/solid';
 import { Typewriter } from 'react-simple-typewriter';
+import { useInView } from 'react-intersection-observer';
 
 export default function Home() {
   const phrases = [
@@ -12,62 +14,170 @@ export default function Home() {
     "Your journey into AI-powered music insights starts here"
   ];
 
+  const sectionColor = "rgb(130, 60, 255)";
+
+  const { ref: ref1, inView: inView1 } = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+
+  const { ref: ref2, inView: inView2 } = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+
+  const { ref: ref3, inView: inView3 } = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-purple-50 to-white relative overflow-hidden">
-      {/* Background decorations */}
-      <svg className="absolute top-0 left-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <pattern id="music-pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
-            <path d="M25 50 Q 40 40, 50 50 T 75 50" fill="none" stroke="rgba(107, 33, 168, 0.1)" strokeWidth="2" />
-            <circle cx="25" cy="50" r="3" fill="rgba(107, 33, 168, 0.1)" />
-            <circle cx="75" cy="50" r="3" fill="rgba(107, 33, 168, 0.1)" />
-          </pattern>
-        </defs>
-        <rect x="0" y="0" width="100%" height="100%" fill="url(#music-pattern)" />
-      </svg>
-
-      <h1 className="text-5xl font-bold mb-4 text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600 animate-pulse relative z-10">
-        Music Analysis Hub
-      </h1>
-
-      <div className="text-center text-xl text-purple-700 mb-8 h-20 relative z-10">
-        <Typewriter
-          words={phrases}
-          loop={0}
-          cursor
-          cursorStyle="|"
-          typeSpeed={70}
-          deleteSpeed={50}
-          delaySpeed={2000}
+    <div className="flex flex-col items-center justify-start min-h-screen bg-gradient-to-b from-purple-100 to-white">
+      {/* Hero Section */}
+      <div className="w-full h-[400px] relative mb-16">
+        <Image
+          src="/background.jpg?height=1080&width=1920"
+          alt="Music background"
+          fill
+          className="object-cover brightness-75"
+          priority
         />
+        <div className="absolute inset-0 bg-purple-900/30" />
+        
+        {/* Centered Content */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center">
+          <h1 className="text-6xl font-bold mb-4 text-center text-white">
+            Music Analysis Hub
+          </h1>
+          <div className="text-center text-xl text-white/90 h-20">
+            <Typewriter
+              words={phrases}
+              loop={0}
+              cursor
+              cursorStyle="|"
+              typeSpeed={70}
+              deleteSpeed={50}
+              delaySpeed={2000}
+            />
+          </div>
+        </div>
       </div>
 
-      <div className="flex flex-col gap-8 max-w-4xl w-full px-4">
-        <Link href="/genre-classification" className="block">
-          <div className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 relative overflow-hidden group">
-            <div className="absolute inset-0 bg-gradient-to-br from-purple-400 to-indigo-500 opacity-75 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <div className="relative z-10">
-              <MusicalNoteIcon className="h-16 w-16 text-white mb-4 mx-auto" />
-              <h2 className="text-2xl font-bold text-white text-center mb-2">Genre Classification</h2>
-              <p className="text-purple-100 text-center">
-                Upload your audio and discover its genre instantly using our AI-powered classification system.
-              </p>
+      {/* Content Sections */}
+      <div className="flex flex-col gap-12 max-w-5xl w-full px-4 pb-16">
+        <div ref={ref1}>
+          <Link href="/genre-classification" className="block">
+            <div
+              className={`p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-500 relative overflow-hidden group ${
+                inView1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+              }`}
+              style={{ backgroundColor: sectionColor }}
+            >
+              <div className="relative z-10 flex items-center justify-between">
+                <div>
+                  <MusicalNoteIcon className="h-16 w-16 text-white mb-4" />
+                  <h2 className="text-2xl font-bold text-white mb-2">Genre Classification</h2>
+                  <p className="text-purple-100 mb-4">
+                    Upload your audio and discover its genre instantly using our AI-powered classification system.
+                  </p>
+                  <ul className="space-y-2 text-white/90">
+                    <li className="flex items-center">
+                      <span className="mr-2">•</span>
+                      Supports multiple audio formats (MP3, WAV, FLAC)
+                    </li>
+                    <li className="flex items-center">
+                      <span className="mr-2">•</span>
+                      Real-time analysis with high accuracy
+                    </li>
+                    <li className="flex items-center">
+                      <span className="mr-2">•</span>
+                      Detailed genre breakdown and confidence scores
+                    </li>
+                  </ul>
+                </div>
+                <div className="flex items-center justify-center h-8 w-8 bg-white rounded-full">
+                  <span className="text-purple-800 text-lg font-bold">→</span>
+                </div>
+              </div>
             </div>
-          </div>
-        </Link>
+          </Link>
+        </div>
 
-        <Link href="/song-details" className="block">
-          <div className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 relative overflow-hidden group">
-            <div className="absolute inset-0 bg-gradient-to-br from-indigo-400 to-purple-500 opacity-75 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <div className="relative z-10">
-              <MicrophoneIcon className="h-16 w-16 text-white mb-4 mx-auto" />
-              <h2 className="text-2xl font-bold text-white text-center mb-2">Song Identification</h2>
-              <p className="text-indigo-100 text-center">
-                Search for songs and get detailed information powered by the Spotify API.
-              </p>
+        <div ref={ref2}>
+          <Link href="/song-details" className="block">
+            <div
+              className={`p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-500 relative overflow-hidden group ${
+                inView2 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+              }`}
+              style={{ backgroundColor: sectionColor }}
+            >
+              <div className="relative z-10 flex items-center justify-between">
+                <div>
+                  <MicrophoneIcon className="h-16 w-16 text-white mb-4" />
+                  <h2 className="text-2xl font-bold text-white mb-2">Song Identification</h2>
+                  <p className="text-purple-100 mb-4">
+                   Discover your songs 
+                  </p>
+                  <ul className="space-y-2 text-white/90">
+                    <li className="flex items-center">
+                      <span className="mr-2">•</span>
+                      Access detailed information about millions of songs
+                    </li>
+                    <li className="flex items-center">
+                      <span className="mr-2">•</span>
+                      View  song metrics and analytics
+                    </li>
+                    <li className="flex items-center">
+                      <span className="mr-2">•</span>
+                      Discover similar songs and recommendations
+                    </li>
+                  </ul>
+                </div>
+                <div className="flex items-center justify-center h-8 w-8 bg-white rounded-full">
+                  <span className="text-purple-800 text-lg font-bold">→</span>
+                </div>
+              </div>
             </div>
-          </div>
-        </Link>
+          </Link>
+        </div>
+
+        <div ref={ref3}>
+          <Link href="/chatbot" className="block">
+            <div
+              className={`p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-500 relative overflow-hidden group ${
+                inView3 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+              }`}
+              style={{ backgroundColor: sectionColor }}
+            >
+              <div className="relative z-10 flex items-center justify-between">
+                <div>
+                  <BookOpenIcon className="h-16 w-16 text-white mb-4" />
+                  <h2 className="text-2xl font-bold text-white mb-2">Music Chatbot</h2>
+                  <p className="text-purple-100 mb-4">
+                    Engage with our AI-powered chatbot for music-related queries and insights.
+                  </p>
+                  <ul className="space-y-2 text-white/90">
+                    <li className="flex items-center">
+                      <span className="mr-2">•</span>
+                      Ask questions about music theory, history, and artists
+                    </li>
+                    <li className="flex items-center">
+                      <span className="mr-2">•</span>
+                      Get personalized music recommendations
+                    </li>
+                    <li className="flex items-center">
+                      <span className="mr-2">•</span>
+                      Explore our extensive knowledge base on music topics
+                    </li>
+                  </ul>
+                </div>
+                <div className="flex items-center justify-center h-8 w-8 bg-white rounded-full">
+                  <span className="text-purple-800 text-lg font-bold">→</span>
+                </div>
+              </div>
+            </div>
+          </Link>
+        </div>
       </div>
     </div>
   );

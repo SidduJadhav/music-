@@ -99,8 +99,8 @@ export default function GenreClassification() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-purple-50 to-white relative overflow-hidden">
-      {/* Decorative background SVGs */}
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start justify-center min-h-screen bg-gradient-to-b from-purple-50 to-white relative overflow-hidden p-8">
+      {}
       <svg className="absolute top-0 left-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <pattern id="music-pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
@@ -112,18 +112,13 @@ export default function GenreClassification() {
         <rect x="0" y="0" width="100%" height="100%" fill="url(#music-pattern)" />
       </svg>
 
-      <h1 className="text-4xl font-bold mb-8 text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600 animate-pulse relative z-10">
-        Classify Your Music
-      </h1>
-      <div className="mb-8 text-center">
-        <Link href="/song-identification" className="text-purple-600 hover:text-purple-700 hover:underline">
-          ← Back to Song Identification
-        </Link>
-        <p className="mt-4 text-gray-600">
-          Upload an MP3 file to classify its genre. You can use files downloaded from Zedge or any other source.
-        </p>
+      <div className="col-span-full text-center mb-8">
+        <h1 className="text-4xl font-bold mb-8 text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600 animate-pulse relative z-10">
+          Classify Your Music
+        </h1>
+      
       </div>
-      <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full relative overflow-hidden z-10">
+      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-xl relative overflow-hidden z-10">
         <div className="relative z-10">
           <div className="mb-6 text-center">
             <MusicalNoteIcon className="h-16 w-16 text-purple-600 mx-auto mb-4 animate-bounce" />
@@ -187,39 +182,40 @@ export default function GenreClassification() {
           </form>
         </div>
       </div>
-
-      {/* Workflow Steps */}
-      <div className="mt-8 bg-white p-6 rounded-lg shadow-lg max-w-md w-full relative z-10">
-        <h2 className="text-2xl font-semibold text-center text-purple-700 mb-4">Workflow Progress</h2>
-        <div className="flex justify-between mb-4">
-          {workflowSteps.map((step, index) => (
-            <div key={step} className="flex flex-col items-center">
-              <div
-                className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                  index <= currentStep ? 'bg-purple-600 text-white' : 'bg-gray-200 text-gray-600'
-                }`}
-              >
-                {index + 1}
+      <div className="space-y-8">
+        {/* Workflow Steps */}
+        <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-xl relative z-10">
+          <h2 className="text-2xl font-semibold text-center text-purple-700 mb-4">Workflow Progress</h2>
+          <div className="flex justify-between mb-4">
+            {workflowSteps.map((step, index) => (
+              <div key={step} className="flex flex-col items-center">
+                <div
+                  className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                    index <= currentStep ? 'bg-purple-600 text-white' : 'bg-gray-200 text-gray-600'
+                  }`}
+                >
+                  {index + 1}
+                </div>
+                <p className="text-xs mt-2">{step}</p>
               </div>
-              <p className="text-xs mt-2">{step}</p>
-            </div>
-          ))}
+            ))}
+          </div>
+          <p className="text-sm text-center text-gray-600">{progressMessage}</p>
         </div>
-        <p className="text-sm text-center text-gray-600">{progressMessage}</p>
-      </div>
 
-      {/* Display Classification Result */}
-      {classificationResult && (
-        <div className="mt-8 bg-white p-6 rounded-lg shadow-lg max-w-md w-full relative z-10">
-          <h2 className="text-2xl font-semibold text-center text-purple-700">Prediction Result</h2>
-          <p className="mt-4 text-center text-gray-600">
-            Predicted Genre: <span className="font-bold text-purple-600">{classificationResult.predicted_class}</span>
-          </p>
-          <p className="mt-2 text-center text-gray-600">
-            Confidence: <span className="font-bold text-purple-600">{classificationResult.confidence}%</span>
-          </p>
-        </div>
-      )}
+        {/* Display Classification Result */}
+        {classificationResult && (
+          <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-xl relative z-10">
+            <h2 className="text-2xl font-semibold text-center text-purple-700">Prediction Result</h2>
+            <p className="mt-4 text-center text-gray-600">
+              Predicted Genre: <span className="font-bold text-purple-600">{classificationResult.predicted_class}</span>
+            </p>
+            <p className="mt-2 text-center text-gray-600">
+              Confidence: <span className="font-bold text-purple-600">{classificationResult.confidence}%</span>
+            </p>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

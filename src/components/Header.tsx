@@ -61,7 +61,7 @@ export default function Header() {
               </Link>
             </li>
             <li>
-              <Link href="/song-details" className="hover:text-purple-200 transition-colors">
+              <Link href="/overview" className="hover:text-purple-200 transition-colors">
                 <InformationCircleIcon className="h-6 w-6" />
               </Link>
             </li>
